@@ -27,13 +27,45 @@
 			<br/>
 		</div>
 	<?php endif; ?>
-	<?php echo $form->errorSummary($model); ?>
 
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'id_sortie_conteneur', array('label'=>'N° Sortie Conteneur','class'=>'col-sm-3 control-label no-padding-right')); ?>
 		<div class="col-sm-9">
 			<?php echo $form->textField($model,'id_sortie_conteneur', array('class'=>'col-xs-10 col-sm-5')); ?>
 			<?php echo $form->error($model,'id_sortie_conteneur'); ?>
+		</div>
+	</div>
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'poid_reel', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php echo $form->textField($model,'poid_reel', array('class'=>'col-xs-10 col-sm-5')); ?>
+			<?php echo $form->error($model,'poid_reel'); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'num_eir', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php echo $form->textField($model,'num_eir', array('class'=>'col-xs-10 col-sm-5')); ?>
+			<?php echo $form->error($model,'num_eir'); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'date_entree_tc', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+				'model' => $model,
+				'attribute' => 'date_entree_tc',
+				'options' => array(
+					'showAnim' => 'fold',
+					'dateFormat' => 'dd-mm-yy',
+				),
+				'htmlOptions' => array(
+					'class'=>'',
+				),
+			)); ?>
+			<?php echo $form->error($model,'date_entree_tc'); ?>
 		</div>
 	</div>
 
@@ -52,6 +84,22 @@
 				),
 			)); ?>
 			<?php echo $form->error($model,'date_livraison'); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'etat', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php //echo $form->textField($model,'etat',array('size'=>60,'maxlength'=>255)); ?>
+			<?php $this->widget('ext.select2.XSelect2', array(
+				'model'=>$model,
+				'attribute'=>'etat',
+				'data'=>EtatTc::getListeData(),
+				'htmlOptions'=>array(
+					'style'=>'width:25%;',
+				),
+			));?>
+			<?php echo $form->error($model,'etat', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
 		</div>
 	</div>
 
@@ -92,14 +140,6 @@
 		<div class="col-sm-9">
 			<?php echo $form->textField($model,'poid_brut', array('class'=>'col-xs-10 col-sm-5')); ?>
 			<?php echo $form->error($model,'poid_brut'); ?>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'poid_reel', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
-		<div class="col-sm-9">
-			<?php echo $form->textField($model,'poid_reel', array('class'=>'col-xs-10 col-sm-5')); ?>
-			<?php echo $form->error($model,'poid_reel'); ?>
 		</div>
 	</div>
 

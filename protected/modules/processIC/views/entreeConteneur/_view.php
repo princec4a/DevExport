@@ -11,12 +11,14 @@
 
 		<div class="widget-body">
 			<div class="widget-main">
+				<?php /*
 				<div class=""><span style="display: block; float: left; width: 50%;">Chauffeur :</span> <strong><?php echo CHtml::encode($data->chauffeur); ?></strong></div>
+ 				*/?>
 				<hr style="margin: 0 0 5px;" />
-				<div class=""><span style="display: block; float: left; width: 85%;">Site :</span> <strong><?php echo CHtml::encode($data->site); ?></strong></div>
-				<div class=""><span style="display: block; float: left; width: 85%;">Heure de fin d'empotage :</span> <strong><?php echo CHtml::encode($data->heure_fin_empotage); ?></strong></div>
-				<div class=""><span style="display: block; float: left; width: 85%;">N° Plomb :</span> <strong><?php echo CHtml::encode($data->num_plomb); ?></strong></div>
-				<div class=""><span style="display: block; float: left; width: 85%;">Date Livraison :</span> <strong><?php echo CHtml::encode($data->date_livraison); ?></strong></div>
+				<div class=""><span style="display: block; float: left; width: 75%;;">N° EIR :</span> <strong><?php echo CHtml::encode($data->num_eir); ?></strong></div>
+				<div class=""><span style="display: block; float: left; width: 75%;">Poid Net :</span> <strong><?php echo CHtml::encode($data->poid_reel); ?></strong></div>
+				<div class=""><span style="display: block; float: left; width: 75%;">Date Livraison :</span> <strong><?php echo CHtml::encode($data->date_livraison); ?></strong></div>
+				<div style="clear: both;"></div>
 			</div>
 		</div>
 	</div>

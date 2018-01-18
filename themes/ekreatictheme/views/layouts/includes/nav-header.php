@@ -373,7 +373,7 @@
                 <?php endif; ?>
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="<?php echo Yii::app()->theme->baseUrl;  ?>/assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                        <!--img class="nav-user-photo" src="<?php echo Yii::app()->theme->baseUrl;  ?>/assets/images/avatars/user.jpg" alt="Jason's Photo" /-->
 								<span class="user-info">
 									<small>Bienvenu,</small> <?php echo Yii::app()->user->name; ?>
 								</span>

@@ -24,6 +24,7 @@ return array(
 		'ext.DynamicTabularForm.*',
 		'application.modules.nfy.components.Nfy',
 		'application.modules.nfy.models.*',
+		'ext.Numbers',
 	),
 
 	'modules'=>array(
@@ -82,6 +83,7 @@ return array(
 		'processDevis',
 		'processIC',
 		'processNeeds',
+		'processInvoice',
 	),
 
 	// application components
@@ -119,6 +121,13 @@ return array(
 			'password' => 'nelci@069497849',
 			'charset' => 'utf8',
 		),
+		/*'db'=>array(
+			'connectionString' => 'mysql:host=91.216.107.182;dbname=le242924812_2whysx',
+			'emulatePrepare' => true,
+			'username' => 'le242924812',
+			'password' => 'v9az78bnic',
+			'charset' => 'utf8',
+		),*/
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

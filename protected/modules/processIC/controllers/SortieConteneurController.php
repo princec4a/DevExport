@@ -28,7 +28,7 @@ class SortieConteneurController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array(),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -36,7 +36,7 @@ class SortieConteneurController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','statistiqueSortieTC','statistiqueSortieTCByBooking'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -70,7 +70,11 @@ class SortieConteneurController extends Controller
 
 		if(isset($_POST['SortieConteneur']))
 		{
+
 			$model->attributes=$_POST['SortieConteneur'];
+
+			$model->id_type_tc = $_POST['SortieConteneur']['id_type_tc'];
+			$model->id_type_bon = $_POST['SortieConteneur']['id_type_bon'];
 			$model->id_dossier = $this->getDossierClient($model->num_booking);
 			$model->id_user = Yii::app()->user->id;
 			$model->date_created = date('Y-m-d H:i:s');
@@ -158,10 +162,110 @@ class SortieConteneurController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('SortieConteneur');
+		$model = new SortieConteneur;
+
+		$criteria  = (isset($_POST['SortieConteneur']['date_sortie_tc']) && !empty($_POST['SortieConteneur']['date_sortie_tc'])) ?
+			array(
+				'condition'=>"date_sortie_tc = '".date('Y-m-d', strtotime($_POST['SortieConteneur']['date_sortie_tc']))."' ",
+				'order'=>'id DESC',
+			):array(
+				'order'=>'id DESC',
+			);
+
+		$options = array(
+			'criteria'=> $criteria,
+			'pagination'=>array(
+				'pageSize'=>6,
+			),
+		);
+
+		$dataProvider=new CActiveDataProvider('SortieConteneur', $options);
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+			'model'=>$model
 		));
+	}
+
+	public function actionStatistiqueSortieTC()
+	{
+		$model=new SortieConteneur;
+		$datas = array();
+
+		if(isset($_POST['SortieConteneur'])){
+
+			$booking = $_POST['SortieConteneur']['num_booking'];
+
+			$du = ($_POST['SortieConteneur']['date_created'] == '0000-00-00')? null : $_POST['SortieConteneur']['date_created'];
+			$au = ($_POST['SortieConteneur']['date_modified'] == '0000-00-00')? null : $_POST['SortieConteneur']['date_modified'];
+
+			$criteria = new CDbCriteria();
+			$criteria->addCondition("num_booking=:booking");
+			$criteria->params = array(':booking' => $booking);
+			$model = SortieConteneur::model()->findAll($criteria);
+
+			$datas['booking'] = $booking;
+			$datas['du'] = $du;
+			$datas['au'] = $au;
+			$datas['nb'] = SortieConteneur::model()->count($criteria);
+
+			echo CJSON::encode($datas);
+
+			Yii::app()->end();
+		}
+
+		$this->render('statistiqueSortieTC',array(
+			'model'=>$model,
+		));
+	}
+
+
+
+	public function actionStatistiqueSortieTCByBooking($booking, $du, $au)
+	{
+		$model=$this->loadModelByBooking($booking);
+		$arraySortie = array(new SortieConteneur);
+		$trouve = false;
+
+		if($du != 'null' && $au == 'null'){
+			//print_r('ici');
+			foreach($model as $key => $sortie){
+				if(strtotime(date('Y-m-d', strtotime($sortie->date_sortie_tc))) >= strtotime($du)){
+					$arraySortie[$key] = $sortie;
+				}
+			}
+		}else{
+			foreach($model as $key => $sortie){
+				if(strtotime($du) <= strtotime(date('Y-m-d', strtotime($sortie->date_sortie_tc))) && strtotime(date('Y-m-d', strtotime($sortie->date_sortie_tc))) <= strtotime($au) ){
+					$arraySortie[$key] = $sortie;
+					$trouve = true;
+				}
+			}
+
+			if(!$trouve)
+				$arraySortie = array();
+		}
+
+		//print_r(count($arraySortie));
+
+		//exit;
+
+		//$mPDF1 = Yii::app()->ePdf->mpdf('','A4-L','','',/*$mgl*/10,/*$mgr*/10,/*$mgt*/30,/*$mgb*/20,/*$mgh*/10,/*$mgf*/10);
+		/*$mPDF1->WriteHTML(*/
+		$this->renderPartial(
+			'statistiqueSortieTCByBooking',
+			array(
+				'model'=>$model,
+				'du'=>$du,
+				'au'=>$au,
+				'booking'=>$booking,
+				'nb'=>count($arraySortie),
+				'client'=>DossierClient::model()->find("num_booking = '".$booking."'"),
+				'sorties'=>$arraySortie,
+			)//,
+		//true
+		) /*)*/;
+
+		//$mPDF1->Output();
 	}
 
 	/**
@@ -189,6 +293,17 @@ class SortieConteneurController extends Controller
 	public function loadModel($id)
 	{
 		$model=SortieConteneur::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	public function loadModelByBooking($booking)
+	{
+		$criteria = new CDbCriteria();
+		$criteria->addCondition("num_booking=:booking");
+		$criteria->params = array(':booking' => $booking);
+		$model = SortieConteneur::model()->findAll($criteria);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

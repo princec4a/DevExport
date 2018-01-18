@@ -20,6 +20,7 @@
 				)); ?>
 				<!-- breadcrumbs -->
 			<?php endif?>
+			<!--
 			<div class="nav-search" id="nav-search">
 				<form class="form-search">
 								<span class="input-icon">
@@ -27,7 +28,7 @@
 									<i class="ace-icon fa fa-search nav-search-icon"></i>
 								</span>
 				</form>
-			</div><!-- /.nav-search -->
+			</div> /.nav-search -->
 		</div>
 
 		<?php if( $this->id!=='install' ): ?>

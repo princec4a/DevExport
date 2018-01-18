@@ -55,26 +55,39 @@
                 //array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Lancer un Boocking <b class="arrow"></b>', 'url'=>array('/processCustomer/client/booking',)),
                 array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Relevé de compte client <b class="arrow"></b>', 'url'=>array('/processCustomer/client/searchReleveCmpt',)),
             ), 'visible'=>(Yii::app()->user->checkAccess('DD') || Yii::app()->user->checkAccess('DG') || Yii::app()->user->checkAccess('Caissier') || Yii::app()->user->checkAccess('CMPT'))),
+
             array('label'=>'<i class="menu-icon fa fa-desktop"></i> <span class="menu-text">Caisse</span><b class="arrow fa fa-angle-down"></b>',  'url'=>array('#'),'linkOptions'=>array("class"=>"dropdown-toggle"),
                 'items'=>array(
                     array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Sorite Caisse<b class="arrow"></b>', 'url'=>array('/processBC/bonCaisse/create',)),
                     array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Entrée Caisse<b class="arrow"></b>', 'url'=>array('/processBC/bonEncaissement/create',)),
                 ), 'visible'=>(Yii::app()->user->checkAccess('Caissier') || Yii::app()->user->checkAccess('DG') || Yii::app()->user->checkAccess('CMPT'))),
+
             array('label'=>'<i class="menu-icon fa fa-list"></i> <span class="menu-text">Devis</span><b class="arrow fa fa-angle-down"></b>', 'url'=>array('#'),'linkOptions'=>array("class"=>"dropdown-toggle"),
                 'items'=>array(
                     array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Devis Administratifs<b class="arrow"></b>', 'url'=>array('/processDevis/devisA/index',)),
                     array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Devis Douane<b class="arrow"></b>', 'url'=>array('/processDevis/devisD/index',)),
                 ), 'visible'=>(Yii::app()->user->checkAccess('RTT') || Yii::app()->user->checkAccess('DG'))),
+
             array('label'=>'<i class="menu-icon fa fa-pencil-square-o"></i> <span class="menu-text">Inter-Change</span><b class="arrow fa fa-angle-down"></b>', 'url'=>array('#'),'linkOptions'=>array("class"=>"dropdown-toggle"),
                 'items'=> array(
                     array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Sortie Contrneurs <b class="arrow"></b>', 'url'=>array('/processIC/sortieConteneur/index')),
                     array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Entrée Conteneurs <b class="arrow"></b>', 'url'=>array('/processIC/entreeConteneur/index')),
                 ), 'visible'=>(Yii::app()->user->checkAccess('RTT') || Yii::app()->user->checkAccess('DG') || Yii::app()->user->checkAccess('CO') || Yii::app()->user->checkAccess('Informatique'))),
+
             array('label'=>'<i class="menu-icon fa fa-shopping-cart"></i> <span class="menu-text">Besoin</span><b class="arrow fa fa-angle-down"></b>',  'url'=>array('#'),'linkOptions'=>array("class"=>"dropdown-toggle"),
                 'items'=>array(
                     array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Nouvel Etat de Besoins<b class="arrow"></b>', 'url'=>array('/processNeeds/besoin/create',)),
                     array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Consulter les Etats de Besoins<b class="arrow"></b>', 'url'=>array('/processNeeds/besoin/index',)),
                 ), 'visible'=>(Yii::app()->user->checkAccess('Caissier') || Yii::app()->user->checkAccess('DG') || Yii::app()->user->checkAccess('DD') || Yii::app()->user->checkAccess('RTT') || Yii::app()->user->checkAccess('CMPT') || Yii::app()->user->checkAccess('Informatique'))),
+
+            array('label'=>'<i class="menu-icon glyphicon glyphicon-euro"></i> <span class="menu-text">Facturation</span><b class="arrow fa fa-angle-down"></b>',  'url'=>array('#'),'linkOptions'=>array("class"=>"dropdown-toggle"),
+                'items'=>array(
+                    array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Nouvel facture<b class="arrow"></b>', 'url'=>array('/processInvoice/facture/create',)),
+                    array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Consulter les factures<b class="arrow"></b>', 'url'=>array('/processInvoice/facture/index',)),
+                    array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Nouvelle liste de colisage<b class="arrow"></b>', 'url'=>array('/processInvoice/listeColisage/create',)),
+                    array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Consulter liste de colisage<b class="arrow"></b>', 'url'=>array('/processInvoice/listeColisage/index',)),
+                ), 'visible'=>(Yii::app()->user->checkAccess('Caissier') || Yii::app()->user->checkAccess('DG') || Yii::app()->user->checkAccess('DD') || Yii::app()->user->checkAccess('RTT') || Yii::app()->user->checkAccess('CMPT') || Yii::app()->user->checkAccess('Informatique'))),
+
             array('label'=>'<i class="menu-icon fa fa-tag"></i> <span class="menu-text">Administration</span><b class="arrow fa fa-angle-down"></b>', 'url'=>array('#'),'linkOptions'=>array("class"=>"dropdown-toggle"),
                 'items'=> array(
                 array('label'=>'<i class="menu-icon fa fa-caret-right"></i> Utilisateurs <b class="arrow"></b>', 'url'=>array('/user/admin')),

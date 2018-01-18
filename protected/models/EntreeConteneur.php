@@ -13,6 +13,9 @@
  * @property string $num_plomb
  * @property double $poid_brut
  * @property double $poid_reel
+ * @property string $num_eir
+ * @property integer $etat
+ * @property string $date_entree_tc
  * @property integer $id_sortie_conteneur
  * @property string $date_created
  * @property string $date_modified
@@ -40,14 +43,14 @@ class EntreeConteneur extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('date_livraison, chauffeur, site, heure_fin_empotage, num_plomb, poid_brut, poid_reel', 'required'),
-			array('id_sortie_conteneur, id_user', 'numerical', 'integerOnly'=>true),
+			array('date_livraison, poid_reel, num_eir, id_sortie_conteneur, date_entree_tc', 'required', 'message'=>'Ce champ est obligatoire : {attribute}.'),
+			array('id_sortie_conteneur, id_user, etat', 'numerical', 'integerOnly'=>true),
 			array('poid_brut, poid_reel', 'numerical'),
-			array('numero, chauffeur, site, num_plomb', 'length', 'max'=>255),
+			array('numero, chauffeur, site, num_plomb, num_eir', 'length', 'max'=>255),
 			array('date_created, date_modified', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, numero, date_livraison, chauffeur, site, heure_fin_empotage, num_plomb, poid_brut, poid_reel, id_sortie_conteneur, date_created, date_modified, id_user', 'safe', 'on'=>'search'),
+			array('id, numero, date_livraison, date_entree_tc, chauffeur, site, heure_fin_empotage, num_plomb, poid_brut, poid_reel, num_eir, etat, id_sortie_conteneur, date_created, date_modified, id_user', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,13 +76,16 @@ class EntreeConteneur extends CActiveRecord
 			'id' => 'ID',
 			'numero' => 'Numero',
 			'date_livraison' => 'Date Livraison',
-			'chauffeur' => 'Remorque',
-			'site' => 'Site',
+			'chauffeur' => 'Chaffeur',
+			'site' => 'Parque',
 			'heure_fin_empotage' => 'Heure Fin Empotage',
 			'num_plomb' => 'Num Plomb',
 			'poid_brut' => 'Poid Brut',
-			'poid_reel' => 'Poid Reel',
-			'id_sortie_conteneur' => 'Id Sortie Conteneur',
+			'poid_reel' => 'Poid Net',
+			'num_eir' => 'N° EIR',
+			'etat' => 'Etat',
+			'date_entree_tc' => 'Date Entree Tc',
+			'id_sortie_conteneur' => 'N° Sortie Conteneur',
 			'date_created' => 'Date Created',
 			'date_modified' => 'Date Modified',
 			'id_user' => 'Id User',
@@ -113,7 +119,10 @@ class EntreeConteneur extends CActiveRecord
 		$criteria->compare('num_plomb',$this->num_plomb,true);
 		$criteria->compare('poid_brut',$this->poid_brut);
 		$criteria->compare('poid_reel',$this->poid_reel);
+		$criteria->compare('num_eir',$this->num_eir,true);
+		$criteria->compare('date_entree_tc',$this->date_entree_tc,true);
 		$criteria->compare('id_sortie_conteneur',$this->id_sortie_conteneur);
+		$criteria->compare('etat',$this->etat);
 		$criteria->compare('date_created',$this->date_created,true);
 		$criteria->compare('date_modified',$this->date_modified,true);
 		$criteria->compare('id_user',$this->id_user);
@@ -145,6 +154,7 @@ class EntreeConteneur extends CActiveRecord
 	protected function afterFind(){
 		parent::afterFind();
 		$this->date_livraison = date('d-m-Y', strtotime($this->date_livraison));
+		$this->date_entree_tc = date('d-m-Y', strtotime($this->date_entree_tc));
 		//$this->date_created = date('d/m/Y', strtotime($this->date_created));
 		//$this->date_modified = date('d/m/Y', strtotime($this->date_modified));
 	}

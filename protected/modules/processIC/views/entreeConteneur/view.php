@@ -26,14 +26,23 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		//'id',
-		//'numero',
-		'date_livraison',
-		'chauffeur',
-		'site',
-		'heure_fin_empotage',
-		'num_plomb',
-		'poid_brut',
+		'num_eir',
 		'poid_reel',
+		array(
+			'label' => 'Entrée le',
+			'type'=>'raw',
+			'value' =>$model->date_entree_tc,
+		),
+		array(
+			'label' => 'N° de sortie correspondant',
+			'type'=>'raw',
+			'value' =>$model->idSortieConteneur->numero,
+		),
+		array(
+			'label' => 'Sortie le',
+			'type'=>'raw',
+			'value' =>$model->idSortieConteneur->date_sortie_tc,
+		),
 		/*'date_created',
 		'date_modified',
 		'id_user',*/

@@ -27,21 +27,99 @@
 			<br/>
 		</div>
 	<?php endif; ?>
-	<?php echo $form->errorSummary($model); ?>
-
-	<div class="form-group">
+	<div class="form-group"> <!-- has-error -->
 		<?php echo $form->labelEx($model,'num_booking', array('label'=>'N° Booking','class'=>'col-sm-3 control-label no-padding-right')); ?>
 		<div class="col-sm-9">
 			<?php echo $form->textField($model,'num_booking',array('size'=>60,'maxlength'=>255, 'class'=>'col-xs-10 col-sm-5')); ?>
-			<?php echo $form->error($model,'num_booking'); ?>
+			<?php echo $form->error($model,'num_booking', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
+		</div>
+	</div>
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'num_tc', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php echo $form->textField($model,'num_tc',array('size'=>20,'maxlength'=>20, 'class'=>'col-xs-10 col-sm-2')); ?>
+			<?php $this->widget('ext.select2.XSelect2', array(
+				'model'=>$model,
+				'attribute'=>'id_type_tc',
+				'data'=>TypeTc::getListeData(),
+				'htmlOptions'=>array(
+					'style'=>'width:25%; padding:1px',
+				),
+			));?>
+			<?php echo $form->error($model,'num_tc', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
+		</div>
+	</div>
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'num_bon_sortie', array('label'=>'N° Bon de Sortie','class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php echo $form->textField($model,'num_bon_sortie',array('size'=>60,'maxlength'=>255, 'class'=>'col-xs-10 col-sm-2', 'placeholder'=>'XXXXXXXX')); ?>
+			<?php $this->widget('ext.select2.XSelect2', array(
+				'model'=>$model,
+				'attribute'=>'id_type_bon',
+				'data'=>TypeBon::getListeData(),
+				'htmlOptions'=>array(
+					'style'=>'width:25%; padding:1px',
+				),
+			));?>
+			<?php echo $form->error($model,'num_bon_sortie', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'navire_prevu', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<?php echo $form->labelEx($model,'client', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
 		<div class="col-sm-9">
-			<?php echo $form->textField($model,'navire_prevu',array('size'=>60,'maxlength'=>255, 'class'=>'col-xs-10 col-sm-5')); ?>
-			<?php echo $form->error($model,'navire_prevu'); ?>
+			<?php echo $form->textField($model,'client',array('size'=>60,'maxlength'=>255)); ?>
+			<?php echo $form->error($model,'client', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'num_eir', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php echo $form->textField($model,'num_eir',array('size'=>60,'maxlength'=>255)); ?>
+			<?php echo $form->error($model,'num_eir', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'site', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php echo $form->textField($model,'site',array('size'=>60,'maxlength'=>255)); ?>
+			<?php echo $form->error($model,'site', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'etat', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php //echo $form->textField($model,'etat',array('size'=>60,'maxlength'=>255)); ?>
+			<?php $this->widget('ext.select2.XSelect2', array(
+				'model'=>$model,
+				'attribute'=>'etat',
+				'data'=>EtatTc::getListeData(),
+				'htmlOptions'=>array(
+					'style'=>'width:25%;',
+				),
+			));?>
+			<?php echo $form->error($model,'etat', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<?php echo $form->labelEx($model,'date_sortie_tc', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<div class="col-sm-9">
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+				'model' => $model,
+				'attribute' => 'date_sortie_tc',
+				'options' => array(
+					'showAnim' => 'fold',
+					'dateFormat' => 'dd-mm-yy',
+				),
+				'htmlOptions' => array(
+					'class'=>'',
+				),
+			)); ?>
+			<?php echo $form->error($model,'date_sortie_tc', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
 		</div>
 	</div>
 
@@ -49,23 +127,15 @@
 		<?php echo $form->labelEx($model,'port_destination', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
 		<div class="col-sm-9">
 			<?php echo $form->textField($model,'port_destination',array('size'=>60,'maxlength'=>255, 'class'=>'col-xs-10 col-sm-5')); ?>
-			<?php echo $form->error($model,'port_destination'); ?>
+			<?php echo $form->error($model,'port_destination', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<?php echo $form->labelEx($model,'num_tc', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
+		<?php echo $form->labelEx($model,'navire_prevu', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
 		<div class="col-sm-9">
-			<?php echo $form->textField($model,'num_tc',array('size'=>20,'maxlength'=>20, 'class'=>'col-xs-10 col-sm-5')); ?>
-			<?php echo $form->error($model,'num_tc'); ?>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<?php echo $form->labelEx($model,'num_bon_sortie', array('label'=>'N° Bon de Sortie','class'=>'col-sm-3 control-label no-padding-right')); ?>
-		<div class="col-sm-9">
-			<?php echo $form->textField($model,'num_bon_sortie',array('size'=>60,'maxlength'=>255, 'class'=>'col-xs-10 col-sm-5', 'placeholder'=>'XXXXXXXX')); ?>
-			<?php echo $form->error($model,'num_bon_sortie'); ?>
+			<?php echo $form->textField($model,'navire_prevu',array('size'=>60,'maxlength'=>255, 'class'=>'col-xs-10 col-sm-5')); ?>
+			<?php echo $form->error($model,'navire_prevu', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
 		</div>
 	</div>
 
@@ -83,7 +153,7 @@
 					'class'=>'',
 				),
 			)); ?>
-			<?php echo $form->error($model,'date_livraison_tc'); ?>
+			<?php echo $form->error($model,'date_livraison_tc', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
 		</div>
 	</div>
 
@@ -91,17 +161,9 @@
 		<?php echo $form->labelEx($model,'immatriculation', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
 		<div class="col-sm-9">
 			<?php echo $form->textField($model,'immatriculation',array('size'=>20,'maxlength'=>20, 'class'=>'col-xs-10 col-sm-5', 'placeholder'=>'XXXXXXXX')); ?>
-			<?php echo $form->error($model,'immatriculation'); ?>
+			<?php echo $form->error($model,'immatriculation', array('class'=>'help-block col-xs-12 col-sm-reset inline')); ?>
 		</div>
 	</div>
-
-	<!--div class="form-group">
-		<?php //echo $form->labelEx($model,'poids', array('class'=>'col-sm-3 control-label no-padding-right')); ?>
-		<div class="col-sm-9">
-			<?php // echo $form->textField($model,'poids', array('class'=>'col-xs-10 col-sm-5', 'placeholder'=>'Poids')); ?> Tonne
-			<?php //	echo $form->error($model,'poids'); ?>
-		</div>
-	</div -->
 
 	<div class="clearfix form-actions">
 		<div class="col-md-offset-3 col-md-9">

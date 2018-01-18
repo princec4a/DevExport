@@ -90,7 +90,7 @@
                         </div><!-- /.login-box -->
                     </div><!-- /.position-relative -->
 
-                    <div style="text-align: center">Réaliser par : <a href="" title="Prince Nelcia TSATY">Prince Nelcia TSATY</a></div>
+                    <div style="text-align: center">Réaliser par : <a href="https://github.com/princec4a" target="_blank" title="Prince Nelcia TSATY">Prince Nelcia TSATY</a></div>
                     <div class="profile-social-links align-center">
                         <a href="#" class="tooltip-info" title="" data-original-title="Visit my Facebook" target="_blank">
                             <i class="middle ace-icon fa fa-facebook-square fa-2x blue"></i>

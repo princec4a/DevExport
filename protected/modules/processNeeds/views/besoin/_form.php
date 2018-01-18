@@ -13,8 +13,6 @@
 
 	<p class="note">Les champs avec <span class="required">*</span> sont obligatoires.</p>
 
-	<?php echo $form->errorSummary($model); ?>
-
 	<div class="form-group">
 		<?php echo $form->labelEx($model,'libelle', array('label'=>'Motif','class'=>'col-sm-3 control-label no-padding-right')); ?>
 		<div class="col-sm-9">
